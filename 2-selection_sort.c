@@ -14,25 +14,26 @@
  */
 void selection_sort(int *array, size_t size)
 {
-	unsigned int index, tempo;
+	size_t i, j, min_idx;
+	int temp;
 
-	if (size < 2)
+	if (array == NULL || size < 2)
 		return;
 
-	for (index = 0; index < size; index++)
+	for (i = 0; i < size - 1; i++)
 	{
-		unsigned int x = index;
-		int aux = array[index];
-
-		for (tempo = index + 1; tempo < size; tempo++)
+		min_idx = i;
+		for (j = i + 1; j < size; j++)
 		{
-			if (array[tempo] < aux)
-				aux = array[tempo], x = tempo;
+			if (array[j] < array[min_idx])
+				min_idx = j;
 		}
-		if (x != index)
+
+		if (min_idx != i)
 		{
-			array[x] = array[index];
-			array[index] = aux;
+			temp = array[i];
+			array[i] = array[min_idx];
+			array[min_idx] = temp;
 			print_array(array, size);
 		}
 	}
